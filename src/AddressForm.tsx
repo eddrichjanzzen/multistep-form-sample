@@ -1,6 +1,8 @@
+import FormWrapper from './FormWrapper';
+
 const AddressForm = () => {
   return (
-    <>
+    <FormWrapper title="Address Form">
       <label>Street</label>
       <input autoFocus type="text" required />
       <label>City</label>
@@ -9,7 +11,7 @@ const AddressForm = () => {
       <input type="text" required />
       <label>Zip</label>
       <input type="text" required />
-    </>
+    </FormWrapper>
   );
 };
 
