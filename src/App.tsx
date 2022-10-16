@@ -1,30 +1,40 @@
-import AddressForm from './components/AddressForm';
+import AddressForm from './components/forms/AddressForm';
 import useMultiStepForm from './hooks/useMultiStepForm';
-import UserForm from './components/UserForm';
-import AccountForm from './components/AccountForm';
+import UserForm from './components/forms/UserForm';
+import AccountForm from './components/forms/AccountForm';
 import { FormEvent, useState } from 'react';
+import './App.css';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Step,
+  StepButton,
+  Stepper,
+} from '@mui/material';
 
 type FormData = {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   age: string;
   street: string;
   city: string;
   state: string;
   zip: string;
+  username: string;
   email: string;
   password: string;
 };
 
 function App() {
   const initialFormData = {
-    firstName: '',
-    lastName: '',
+    fullName: '',
     age: '',
     street: '',
     city: '',
     state: '',
     zip: '',
+    username: '',
     email: '',
     password: '',
   };
@@ -37,14 +47,31 @@ function App() {
     });
   };
 
-  const forms = [
-    <UserForm {...formData} updateFields={updateFields} />,
-    <AddressForm {...formData} updateFields={updateFields} />,
-    <AccountForm {...formData} updateFields={updateFields} />,
+  const stepData = [
+    {
+      stepLabel: 'Account Details',
+      stepForm: <AccountForm {...formData} updateFields={updateFields} />,
+    },
+    {
+      stepLabel: 'User Form',
+      stepForm: <UserForm {...formData} updateFields={updateFields} />,
+    },
+    {
+      stepLabel: 'Address Form',
+      stepForm: <AddressForm {...formData} updateFields={updateFields} />,
+    },
   ];
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    useMultiStepForm(forms);
+  const {
+    steps,
+    currentStepIndex,
+    step,
+    goTo,
+    isFirstStep,
+    isLastStep,
+    back,
+    next,
+  } = useMultiStepForm(stepData);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -53,45 +80,40 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        background: 'white',
-        border: '1px solid black',
-        padding: '2rem',
-        margin: '1rem',
-        borderRadius: '.5rem',
-        fontFamily: 'Arial',
-      }}
-    >
-      <form onSubmit={onSubmit}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '0.5rem',
-            right: '0.5rem',
-          }}
-        >
-          {currentStepIndex + 1} / {steps.length}
-        </div>
-        {step}
-        <div
-          style={{
-            marginTop: '1rem',
-            display: 'flex',
-            gap: '0.5rem',
-            justifyContent: 'center',
-          }}
-        >
-          {!isFirstStep && (
-            <button type="button" onClick={back}>
-              Back
-            </button>
-          )}
-          <button type="submit">{isLastStep ? 'Finish' : 'Next'}</button>
-        </div>
-      </form>
-    </div>
+    <Box m={4} maxWidth={800}>
+      <Card>
+        <CardContent>
+          <Box m={2}>
+            <Stepper nonLinear activeStep={currentStepIndex}>
+              {steps.map((step, index) => (
+                <Step key={step.stepLabel}>
+                  <StepButton color="inherit" onClick={() => goTo(index)}>
+                    {step.stepLabel}
+                  </StepButton>
+                </Step>
+              ))}
+            </Stepper>
+            <form onSubmit={onSubmit}>
+              {step.stepForm}
+              <Box display="flex" flexDirection="row" py={2}>
+                <Button
+                  type="button"
+                  variant="outlined"
+                  onClick={back}
+                  disabled={isFirstStep}
+                >
+                  Back
+                </Button>
+                <Box flex="1 1 auto" />
+                <Button type="submit" variant="outlined">
+                  {isLastStep ? 'Finish' : 'Next'}
+                </Button>
+              </Box>
+            </form>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }
 export default App;

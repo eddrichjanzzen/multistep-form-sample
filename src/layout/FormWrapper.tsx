@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 
 type FormWrapperProps = {
@@ -7,21 +8,14 @@ type FormWrapperProps = {
 
 const FormWrapper = ({ title, children }: FormWrapperProps) => {
   return (
-    <>
-      <h2 style={{ textAlign: 'center', margin: 0, marginBottom: '2rem' }}>
+    <Box>
+      <Typography variant="h4" textAlign="center" my={1}>
         {title}
-      </h2>
-      <div
-        style={{
-          display: 'grid',
-          gap: '1rem .5rem',
-          justifyContent: 'flex-start',
-          gridTemplateColumns: 'auto minmax(auto, 400px)',
-        }}
-      >
+      </Typography>
+      <Box display="flex" flexDirection="column" gap={1}>
         {children}
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 };
 
