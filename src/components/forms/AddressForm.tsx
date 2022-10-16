@@ -1,4 +1,5 @@
-import FormWrapper from '../layout/FormWrapper';
+import { TextField } from '@mui/material';
+import FormWrapper from './../../layout/FormWrapper';
 
 type AddressData = {
   street: string;
@@ -7,7 +8,7 @@ type AddressData = {
   zip: string;
 };
 
-type UserFormProps = AddressData & {
+type AddressFormProps = AddressData & {
   updateFields: (fields: Partial<AddressData>) => void;
 };
 
@@ -17,35 +18,31 @@ const AddressForm = ({
   state,
   zip,
   updateFields,
-}: UserFormProps) => {
+}: AddressFormProps) => {
   return (
     <FormWrapper title="Address Form">
-      <label>Street</label>
-      <input
+      <TextField
         autoFocus
-        type="text"
-        required
+        id="street"
+        label="Street"
         value={street}
         onChange={(e) => updateFields({ street: e.target.value })}
       />
-      <label>City</label>
-      <input
-        type="text"
-        required
+      <TextField
+        id="city"
+        label="City"
         value={city}
         onChange={(e) => updateFields({ city: e.target.value })}
       />
-      <label>State</label>
-      <input
-        type="text"
-        required
+      <TextField
+        id="state"
+        label="State"
         value={state}
         onChange={(e) => updateFields({ state: e.target.value })}
       />
-      <label>Zip</label>
-      <input
-        type="text"
-        required
+      <TextField
+        id="zip"
+        label="Zip"
         value={zip}
         onChange={(e) => updateFields({ zip: e.target.value })}
       />
