@@ -19,9 +19,14 @@ const UserForm = ({
   bio,
   updateFields,
 }: UserFormProps) => {
+  const handleAvatarOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    updateFields({ avatarUrl: URL.createObjectURL(e.target.files[0]) });
+  };
+
   return (
     <FormWrapper>
-      <AvatarUpload avatarUrl={avatarUrl} />
+      <AvatarUpload avatarUrl={avatarUrl} onChange={handleAvatarOnChange} />
       <TextField
         autoFocus
         id="fullName"
