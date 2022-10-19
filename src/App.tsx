@@ -16,7 +16,8 @@ import {
 
 type FormData = {
   fullName: string;
-  age: string;
+  bio: string;
+  avatarUrl: string;
   street: string;
   city: string;
   state: string;
@@ -29,7 +30,8 @@ type FormData = {
 function App() {
   const initialFormData = {
     fullName: '',
-    age: '',
+    bio: '',
+    avatarUrl: '',
     street: '',
     city: '',
     state: '',
@@ -49,12 +51,12 @@ function App() {
 
   const stepData = [
     {
-      stepLabel: 'Account Details',
-      stepForm: <AccountForm {...formData} updateFields={updateFields} />,
-    },
-    {
       stepLabel: 'User Form',
       stepForm: <UserForm {...formData} updateFields={updateFields} />,
+    },
+    {
+      stepLabel: 'Account Details',
+      stepForm: <AccountForm {...formData} updateFields={updateFields} />,
     },
     {
       stepLabel: 'Address Form',
