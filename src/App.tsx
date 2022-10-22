@@ -32,7 +32,7 @@ function App() {
     fullName: '',
     bio: '',
     avatarUrl: '',
-    street: '',
+    province: '',
     city: '',
     state: '',
     zip: '',
