@@ -28,7 +28,6 @@ const AccountForm = ({
         onChange={(e) => updateFields({ username: e.target.value })}
       />
       <TextField
-        autoFocus
         id="email"
         label="Email"
         type="email"

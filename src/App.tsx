@@ -82,39 +82,41 @@ function App() {
   };
 
   return (
-    <Box m={4} maxWidth={800}>
-      <Card>
-        <CardContent>
-          <Box m={2}>
-            <Stepper nonLinear activeStep={currentStepIndex}>
-              {steps.map((step, index) => (
-                <Step key={step.stepLabel}>
-                  <StepButton color="inherit" onClick={() => goTo(index)}>
-                    {step.stepLabel}
-                  </StepButton>
-                </Step>
-              ))}
-            </Stepper>
-            <form onSubmit={onSubmit}>
-              {step.stepForm}
-              <Box display="flex" flexDirection="row" py={2}>
-                <Button
-                  type="button"
-                  variant="outlined"
-                  onClick={back}
-                  disabled={isFirstStep}
-                >
-                  Back
-                </Button>
-                <Box flex="1 1 auto" />
-                <Button type="submit" variant="outlined">
-                  {isLastStep ? 'Finish' : 'Next'}
-                </Button>
-              </Box>
-            </form>
-          </Box>
-        </CardContent>
-      </Card>
+    <Box display="flex" justifyContent="center">
+      <Box m={4} width={800}>
+        <Card>
+          <CardContent>
+            <Box m={2}>
+              <Stepper nonLinear activeStep={currentStepIndex}>
+                {steps.map((step, index) => (
+                  <Step key={step.stepLabel}>
+                    <StepButton color="inherit" onClick={() => goTo(index)}>
+                      {step.stepLabel}
+                    </StepButton>
+                  </Step>
+                ))}
+              </Stepper>
+              <form onSubmit={onSubmit}>
+                {step.stepForm}
+                <Box display="flex" flexDirection="row" py={2}>
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    onClick={back}
+                    disabled={isFirstStep}
+                  >
+                    Back
+                  </Button>
+                  <Box flex="1 1 auto" />
+                  <Button type="submit" variant="outlined">
+                    {isLastStep ? 'Finish' : 'Next'}
+                  </Button>
+                </Box>
+              </form>
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
     </Box>
   );
 }
