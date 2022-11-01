@@ -13,29 +13,30 @@ export type City = {
   districtCode: string;
 };
 
+const API_URL = 'https://psgc.gitlab.io/api';
+
 const useAddressForm = () => {
-  const fetchProvinces = () => {
-    const { data, loading, error } = useFetch<Province[]>(
-      'https://psgc.gitlab.io/api/provinces'
-    );
+  const fetchProvinces = async () => {
+    const response = await fetch(`${API_URL}/provinces`);
+    const provinces = await response.json();
 
-    return { data, loading, error };
+    return provinces;
   };
 
-  const fetchCitiesByProvinceCode = (provinceCode: string) => {
-    const { data, loading, error } = useFetch<City[]>(
-      `https://psgc.gitlab.io/api/provinces/{provinceCode}//${provinceCode}/cities`
-    );
+  const fetchCitiesByProvinceCode = async (
+    provinceCode: string | undefined
+  ) => {
+    const response = await fetch(`${API_URL}/provinces/${provinceCode}/cities`);
+    const cities = await response.json();
 
-    return { data, loading, error };
+    return cities;
   };
 
-  const fetchCitiesByRegionCode = (regionCode: string) => {
-    const { data, loading, error } = useFetch<City[]>(
-      `https://psgc.gitlab.io/api/regions/${regionCode}/cities`
-    );
+  const fetchCitiesByRegionCode = async (regionCode: string | undefined) => {
+    const response = await fetch(`${API_URL}/regions/${regionCode}/cities`);
+    const cities = await response.json();
 
-    return { data, loading, error };
+    return cities;
   };
 
   return {
