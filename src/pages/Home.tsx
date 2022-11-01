@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react';
-import './App.css';
 import {
   Box,
   Button,
@@ -18,9 +17,9 @@ type FormData = {
   fullName: string;
   bio: string;
   avatarUrl: string;
-  street: string;
+  province: string;
   city: string;
-  state: string;
+  street: string;
   zip: string;
   username: string;
   email: string;
@@ -34,7 +33,7 @@ function Home() {
     avatarUrl: '',
     province: '',
     city: '',
-    state: '',
+    street: '',
     zip: '',
     username: '',
     email: '',
