@@ -9,11 +9,13 @@ type FormWrapperProps = {
 const FormWrapper = ({ title, children }: FormWrapperProps) => {
   return (
     <Box>
-      {title && (
-        <Typography variant="h4" textAlign="center" my={1}>
-          {title}
-        </Typography>
-      )}
+      <Box mb={2}>
+        {title && (
+          <Typography variant="h4" textAlign="center" my={1}>
+            {title}
+          </Typography>
+        )}
+      </Box>
       <Box display="flex" flexDirection="column" gap={2}>
         {children}
       </Box>

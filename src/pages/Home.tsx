@@ -1,17 +1,11 @@
 import { FormEvent, useState } from 'react';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Step,
-  StepButton,
-  Stepper,
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Typography } from '@mui/material';
 import UserForm from '../components/forms/UserForm';
 import AccountForm from '../components/forms/AccountForm';
 import AddressForm from '../components/forms/AddressForm';
 import useMultiStepForm from '../hooks/useMultiStepForm';
+import FormStepper from '../components/common/FormStepper';
+import { grey } from '@mui/material/colors';
 
 type FormData = {
   fullName: string;
@@ -82,36 +76,62 @@ function Home() {
 
   return (
     <Box display="flex" justifyContent="center">
-      <Box m={4} width={800}>
-        <Card>
+      <Box m={2} width={800}>
+        <Card
+          sx={{
+            height: '95vh',
+          }}
+        >
           <CardContent>
-            <Box m={2}>
-              <Stepper nonLinear activeStep={currentStepIndex}>
-                {steps.map((step, index) => (
-                  <Step key={step.stepLabel}>
-                    <StepButton color="inherit" onClick={() => goTo(index)}>
-                      {step.stepLabel}
-                    </StepButton>
-                  </Step>
-                ))}
-              </Stepper>
-              <form onSubmit={onSubmit}>
-                {step.stepForm}
-                <Box display="flex" flexDirection="row" py={2}>
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    onClick={back}
-                    disabled={isFirstStep}
+            <Box
+              mx={2}
+              sx={{
+                height: '90vh',
+              }}
+            >
+              <FormStepper
+                steps={steps}
+                activeStep={currentStepIndex}
+                goTo={goTo}
+              />
+              <Box>
+                <form onSubmit={onSubmit}>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    sx={{
+                      height: '85vh',
+                    }}
                   >
-                    Back
-                  </Button>
-                  <Box flex="1 1 auto" />
-                  <Button type="submit" variant="outlined">
-                    {isLastStep ? 'Finish' : 'Next'}
-                  </Button>
-                </Box>
-              </form>
+                    <Box>{step.stepForm}</Box>
+                    <Box
+                      justifySelf="flex-end"
+                      display="flex"
+                      flexDirection="row"
+                      py={2}
+                      mt="auto"
+                    >
+                      <Button
+                        type="button"
+                        variant="outlined"
+                        onClick={back}
+                        disabled={isFirstStep}
+                      >
+                        Back
+                      </Button>
+                      <Box flex="1 1 auto" />
+                      <Button type="submit" variant="outlined">
+                        {isLastStep ? 'Finish' : 'Next'}
+                      </Button>
+                    </Box>
+                    <Box py={1}>
+                      <Typography variant="caption" color={grey[400]}>
+                        *Images taken from freepik.com
+                      </Typography>
+                    </Box>
+                  </Box>
+                </form>
+              </Box>
             </Box>
           </CardContent>
         </Card>

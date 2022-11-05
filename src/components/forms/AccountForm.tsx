@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import PasswordField from '../common/PasswordField';
 import FormWrapper from './../../layout/FormWrapper';
 
@@ -20,6 +20,13 @@ const AccountForm = ({
 }: AccountFormProps) => {
   return (
     <FormWrapper title="Account Details">
+      <Box
+        component="img"
+        width="200px"
+        alt="account from image"
+        src="./src/assets/images/account-form-image.png"
+        alignSelf="center"
+      />
       <TextField
         autoFocus
         id="username"

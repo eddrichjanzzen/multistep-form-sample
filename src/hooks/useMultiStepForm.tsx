@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 
-type FormSteps = {
+export type FormSteps = {
   stepForm: ReactElement;
   stepLabel: string;
 };

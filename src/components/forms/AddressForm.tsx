@@ -157,6 +157,7 @@ const AddressForm = ({
         noOptionsText={'NA'}
         value={selectedCity}
         id="city"
+        placeholder="City/Municipality"
         options={cities ?? []}
         isOptionEqualToValue={(option, value) => option.label === value.label}
         onChange={(_e, value) => handleCityOptionOnChange(value)}
@@ -167,7 +168,8 @@ const AddressForm = ({
       <TextField
         autoFocus
         id="street"
-        label="Street"
+        label="Address"
+        placeholder="Unit/ Blk No. Street"
         value={street}
         onChange={(e) => updateFields({ street: e.target.value })}
       />
