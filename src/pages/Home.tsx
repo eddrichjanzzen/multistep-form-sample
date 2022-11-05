@@ -12,6 +12,7 @@ import UserForm from '../components/forms/UserForm';
 import AccountForm from '../components/forms/AccountForm';
 import AddressForm from '../components/forms/AddressForm';
 import useMultiStepForm from '../hooks/useMultiStepForm';
+import FormStepper from '../components/common/FormStepper';
 
 type FormData = {
   fullName: string;
@@ -82,36 +83,47 @@ function Home() {
 
   return (
     <Box display="flex" justifyContent="center">
-      <Box m={4} width={800}>
-        <Card>
+      <Box m={2} width={800}>
+        <Card
+          sx={{
+            height: '95vh',
+          }}
+        >
           <CardContent>
-            <Box m={2}>
-              <Stepper nonLinear activeStep={currentStepIndex}>
-                {steps.map((step, index) => (
-                  <Step key={step.stepLabel}>
-                    <StepButton color="inherit" onClick={() => goTo(index)}>
-                      {step.stepLabel}
-                    </StepButton>
-                  </Step>
-                ))}
-              </Stepper>
-              <form onSubmit={onSubmit}>
-                {step.stepForm}
-                <Box display="flex" flexDirection="row" py={2}>
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    onClick={back}
-                    disabled={isFirstStep}
-                  >
-                    Back
-                  </Button>
-                  <Box flex="1 1 auto" />
-                  <Button type="submit" variant="outlined">
-                    {isLastStep ? 'Finish' : 'Next'}
-                  </Button>
-                </Box>
-              </form>
+            <Box
+              mx={2}
+              sx={{
+                height: '90vh',
+              }}
+            >
+              <FormStepper
+                steps={steps}
+                activeStep={currentStepIndex}
+                goTo={goTo}
+              />
+              <Box>
+                <form onSubmit={onSubmit}>
+                  <Box display="flex" flexDirection="column" height="100%">
+                    <Box>{step.stepForm}</Box>
+                    <Box justifySelf="end">
+                      <Box display="flex" flexDirection="row" py={2}>
+                        <Button
+                          type="button"
+                          variant="outlined"
+                          onClick={back}
+                          disabled={isFirstStep}
+                        >
+                          Back
+                        </Button>
+                        <Box flex="1 1 auto" />
+                        <Button type="submit" variant="outlined">
+                          {isLastStep ? 'Finish' : 'Next'}
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </form>
+              </Box>
             </Box>
           </CardContent>
         </Card>
