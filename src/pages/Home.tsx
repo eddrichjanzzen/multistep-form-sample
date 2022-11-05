@@ -103,23 +103,33 @@ function Home() {
               />
               <Box>
                 <form onSubmit={onSubmit}>
-                  <Box display="flex" flexDirection="column" height="100%">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    sx={{
+                      height: '80vh',
+                    }}
+                  >
                     <Box>{step.stepForm}</Box>
-                    <Box justifySelf="end">
-                      <Box display="flex" flexDirection="row" py={2}>
-                        <Button
-                          type="button"
-                          variant="outlined"
-                          onClick={back}
-                          disabled={isFirstStep}
-                        >
-                          Back
-                        </Button>
-                        <Box flex="1 1 auto" />
-                        <Button type="submit" variant="outlined">
-                          {isLastStep ? 'Finish' : 'Next'}
-                        </Button>
-                      </Box>
+                    <Box
+                      justifySelf="flex-end"
+                      display="flex"
+                      flexDirection="row"
+                      py={2}
+                      mt="auto"
+                    >
+                      <Button
+                        type="button"
+                        variant="outlined"
+                        onClick={back}
+                        disabled={isFirstStep}
+                      >
+                        Back
+                      </Button>
+                      <Box flex="1 1 auto" />
+                      <Button type="submit" variant="outlined">
+                        {isLastStep ? 'Finish' : 'Next'}
+                      </Button>
                     </Box>
                   </Box>
                 </form>

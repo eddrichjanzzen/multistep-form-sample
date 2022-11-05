@@ -13,7 +13,7 @@ const FormStepper = ({
   ...rest
 }: IFormStepperProps) => {
   return (
-    <Box my={2}>
+    <Box py={2}>
       <Stepper nonLinear activeStep={activeStep} {...rest}>
         {steps.map((step, index) => (
           <Step key={step.stepLabel}>
