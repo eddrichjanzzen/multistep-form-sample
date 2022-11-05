@@ -1,5 +1,13 @@
 import { FormEvent, useState } from 'react';
-import { Box, Button, Card, CardContent, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Theme,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import UserForm from '../components/forms/UserForm';
 import AccountForm from '../components/forms/AccountForm';
 import AddressForm from '../components/forms/AddressForm';
@@ -68,6 +76,8 @@ function Home() {
     next,
   } = useMultiStepForm(stepData);
 
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.up('sm'));
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!isLastStep) return next();
@@ -89,11 +99,13 @@ function Home() {
                 height: '90vh',
               }}
             >
-              <FormStepper
-                steps={steps}
-                activeStep={currentStepIndex}
-                goTo={goTo}
-              />
+              {isMobile && (
+                <FormStepper
+                  steps={steps}
+                  activeStep={currentStepIndex}
+                  goTo={goTo}
+                />
+              )}
               <Box>
                 <form onSubmit={onSubmit}>
                   <Box
@@ -123,11 +135,6 @@ function Home() {
                       <Button type="submit" variant="outlined">
                         {isLastStep ? 'Finish' : 'Next'}
                       </Button>
-                    </Box>
-                    <Box py={1}>
-                      <Typography variant="caption" color={grey[400]}>
-                        *Images taken from freepik.com
-                      </Typography>
                     </Box>
                   </Box>
                 </form>
