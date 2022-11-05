@@ -22,7 +22,7 @@ const AccountForm = ({
     <FormWrapper title="Account Details">
       <Box
         component="img"
-        width="220px"
+        width="200px"
         alt="account from image"
         src="./src/assets/images/account-form-image.png"
         alignSelf="center"
