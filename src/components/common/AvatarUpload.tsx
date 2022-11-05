@@ -21,8 +21,8 @@ const AvatarUpload = ({ avatarUrl, onChange }: AvatarUploadProps) => {
           alt=""
           src={avatarUrl}
           sx={{
-            width: { xs: 120, md: 170, lg: 250 },
-            height: { xs: 120, md: 170, lg: 250 },
+            width: { xs: 120, md: 170, lg: 200 },
+            height: { xs: 120, md: 170, lg: 200 },
             border: '0.1px solid lightgray',
           }}
         ></Avatar>
