@@ -96,7 +96,7 @@ function Home() {
             <Box
               mx={2}
               sx={{
-                height: '90vh',
+                height: '80vh',
               }}
             >
               {isMobile && (
