@@ -6,6 +6,8 @@ import AddressForm from '../components/forms/AddressForm';
 import useMultiStepForm from '../hooks/useMultiStepForm';
 import FormStepper from '../components/common/FormStepper';
 import { grey } from '@mui/material/colors';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 
 type FormData = {
   fullName: string;
@@ -41,6 +43,34 @@ function Home() {
       return { ...prev, ...fields };
     });
   };
+
+  const validationSchema = yup.object({
+    fullName: yup.string().required('Full name is required'),
+    bio: yup.string().required('Bio is required'),
+    avatarUrl: yup.string(),
+    province: yup.string().required('Bio is required'),
+    city: yup.string().required('Bio is required'),
+    street: yup.string().required('Bio is required'),
+    zip: yup.string().required('Bio is required'),
+    username: yup.string().required('Bio is required'),
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+  });
+
+  const formik = useFormik({
+    initialValues: initialFormData,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      if (!isLastStep) return next();
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
 
   const stepData = [
     {
