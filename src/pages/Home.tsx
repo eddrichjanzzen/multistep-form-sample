@@ -96,7 +96,7 @@ function Home() {
             <Box
               mx={2}
               sx={{
-                height: '80vh',
+                height: '95vh',
               }}
             >
               {isMobile && (
@@ -112,7 +112,7 @@ function Home() {
                     display="flex"
                     flexDirection="column"
                     sx={{
-                      height: '85vh',
+                      height: '80vh',
                     }}
                   >
                     <Box>{step.stepForm}</Box>
