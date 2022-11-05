@@ -6,6 +6,8 @@ type AvatarUploadProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 };
 
+const fallbackImage = '/src/assets/images/generic-avatar.jpg';
+
 const AvatarUpload = ({ avatarUrl, onChange }: AvatarUploadProps) => {
   return (
     <Box display="flex" justifyContent="center">
@@ -19,11 +21,11 @@ const AvatarUpload = ({ avatarUrl, onChange }: AvatarUploadProps) => {
           alt=""
           src={avatarUrl}
           sx={{
-            width: { xs: 120, md: 150, lg: 200 },
-            height: { xs: 120, md: 150, lg: 200 },
+            width: { xs: 120, md: 170, lg: 250 },
+            height: { xs: 120, md: 170, lg: 250 },
             border: '0.1px solid lightgray',
           }}
-        />
+        ></Avatar>
         <UploadButton
           buttonCaption={avatarUrl !== '' ? 'Edit photo' : 'Upload a photo'}
           onChange={onChange}

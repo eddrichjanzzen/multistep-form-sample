@@ -14,7 +14,7 @@ const FormStepper = ({
 }: IFormStepperProps) => {
   return (
     <Box py={2}>
-      <Stepper nonLinear activeStep={activeStep} {...rest}>
+      <Stepper alternativeLabel nonLinear activeStep={activeStep} {...rest}>
         {steps.map((step, index) => (
           <Step key={step.stepLabel}>
             <StepButton color="inherit" onClick={() => goTo(index)}>

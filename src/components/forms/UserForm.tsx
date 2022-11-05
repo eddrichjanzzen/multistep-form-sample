@@ -1,6 +1,7 @@
-import { TextField } from '@mui/material';
+import { Avatar, Box, filledInputClasses, TextField } from '@mui/material';
 import FormWrapper from '../../layout/FormWrapper';
 import AvatarUpload from '../common/AvatarUpload';
+import UploadButton from '../common/UploadButton';
 
 type UserData = {
   fullName: string;
