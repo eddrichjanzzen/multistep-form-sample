@@ -39,11 +39,19 @@ const AddressForm = ({
 
   // selected province
   const [selectedProvince, setSelectedProvince] =
-    useState<MappedProvince | null>();
+    useState<MappedProvince | null>(null);
+
+  const [selectedCity, setSelectedCity] = useState<MappedCity | null>(null);
 
   const handleProvinceOptionOnChange = (value: MappedProvince | null) => {
     setSelectedProvince(value);
     updateFields({ province: value?.label });
+    setSelectedCity(null);
+  };
+
+  const handleCityOptionOnChange = (value: MappedCity | null) => {
+    setSelectedCity(value);
+    updateFields({ city: value?.label });
   };
 
   const { data: provinces, isLoading: isProvinceDataLoading } = useQuery<
@@ -105,6 +113,11 @@ const AddressForm = ({
     onSuccess: (data) => {
       //if no city appears, set the value of city to NA
       if (Array.isArray(data) && data.length === 0) {
+        setSelectedCity({
+          label: 'NA',
+          regionCode: 'NA',
+          provinceCode: 'NA',
+        });
         updateFields({ city: 'NA' });
       }
     },
@@ -116,6 +129,9 @@ const AddressForm = ({
       <Autocomplete
         disablePortal
         disabled={isProvinceDataLoading}
+        loading={isProvinceDataLoading}
+        loadingText={'Fetching provinces...'}
+        noOptionsText={'NA'}
         id="province"
         // check for null here
         // reference: https://www.neldeles.com/blog/posts/handling-undefined-in-react-query
@@ -136,10 +152,14 @@ const AddressForm = ({
       <Autocomplete
         disablePortal
         disabled={isCityDataLoading}
+        loading={isCityDataLoading}
+        loadingText={'Fetching cities...'}
+        noOptionsText={'NA'}
+        value={selectedCity}
         id="city"
         options={cities ?? []}
         isOptionEqualToValue={(option, value) => option.label === value.label}
-        onChange={(_e, value) => updateFields({ city: value?.label })}
+        onChange={(_e, value) => handleCityOptionOnChange(value)}
         renderInput={(params: TextFieldProps) => (
           <TextField id="city" label="City" value={city} {...params} />
         )}
